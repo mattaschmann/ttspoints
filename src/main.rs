@@ -2,10 +2,28 @@ use std::env;
 
 fn main() {
   let args: Vec<String> = env::args().collect();
-  let hours = &args[1].parse::<f64>().unwrap();
-  let minutes = &args[2].parse::<f64>().unwrap();
 
-  print!("{}", ttspoints(hours, minutes).to_string())
+  if args.len() != 3 {
+    print!("You must pass in two arguments, hours and minutes");
+    return;
+  }
+
+  let hours = match args[1].parse::<f64>() {
+    Ok(h) => h,
+    Err(_) => {
+      print!("hours argument was of wrong type!");
+      return;
+    }
+  };
+  let minutes = match args[2].parse::<f64>() {
+    Ok(m) => m,
+    Err(_) => {
+      print!("minutes argument was of wrong type!");
+      return;
+    }
+  };
+
+  print!("{}", ttspoints(&hours, &minutes).to_string())
 }
 
 /**
