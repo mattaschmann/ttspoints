@@ -1,7 +1,7 @@
-use std::env;
+use std::env::args;
 
 fn main() {
-  let args: Vec<String> = env::args().collect();
+  let args: Vec<String> = args().collect();
 
   if args.len() != 3 {
     print!("You must pass in two arguments, hours and minutes");
@@ -30,10 +30,7 @@ fn main() {
  * Convert an hour and minute into story points
  */
 fn ttspoints(hours: &f64, minutes: &f64) -> f64 {
-  let minutes_fraction = minutes / 60.0;
-  let time = hours + minutes_fraction;
-
-  time / 8.0
+  (hours + minutes / 60.0) / 8.0
 }
 
 #[test]
